@@ -184,7 +184,13 @@
                                                         $item = '<div dir="ltr" class="mb-3">'.$data['data'].'</div>';
                                                     }?>
                                             <?php elseif($data['item'] == "audio") :
-                                                $item = '<center><audio controls controlsList="nodownload"><source src="'.$link['value'].'/assets/myaudio/'.$data['data'].'?t='.time().'" type="audio/mpeg"></audio></center>';
+                                                $item = '<center>
+                                                    <audio id="audio-'.$data['id_item'].'" class="audio" data-id="'.$data['id_item'].'"><source src="'.$link['value'].'/assets/myaudio/'.$data['data'].'?t='.time().'" type="audio/mpeg"></audio>
+                                                    <progress id="seekbar-'.$data['id_item'].'" value="0" max="1" style="width:100%;"></progress><br>
+                                                    <button class="btn btn-success btnAudio" data-id="'.$data['id_item'].'" type="button">'.tablerIcon("player-play", "").' play</button>
+                                                    <p><small class="text-danger"><i>note : perhatian, audio hanya dapat diputar satu kali</i></small></p>
+                                                </center>
+                                            ';
                                             ?>
                                             <?php endif;?>
                                             <div class="shadow card mb-3 soal">
@@ -274,6 +280,17 @@
 <?php $this->load->view("_partials/footer")?>
 
 <script>
+    $('.audio').on('timeupdate', function() {
+        let id = $(this).data("id");
+        $('#seekbar-'+id).attr("value", this.currentTime / this.duration);
+    });
+
+    $(".btnAudio").click(function(){
+        id = $(this).data("id");
+        $("#audio-"+id)[0].play();
+        $(this).hide();
+    })
+
     $("#hidePassword").hide();
     
     $("#showPassword").click(function(){
@@ -567,4 +584,13 @@
         let value = $(this).val();
         $("#jawaban_sesi_"+id[0]+""+id[1]).val(value);
     });
+
+    document.addEventListener('play', function(e){  
+        var audios = document.getElementsByTagName('audio');  
+        for(var i = 0, len = audios.length; i < len;i++){  
+            if(audios[i] != e.target){  
+                audios[i].pause();  
+            }  
+        }  
+    }, true);
 </script>
