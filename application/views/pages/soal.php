@@ -142,6 +142,7 @@
                                         <input type="hidden" name="kunci_sesi[]" value="<?= $sesi['id_sub']?>">
                                         <?php foreach ($sesi['soal'] as $i => $data) :
                                             $item = "";
+                                            $padding = "";
                                             ?>
                                             <?php if($data['item'] == "soal") :?>
                                                 <?php if($data['penulisan'] == "RTL") :?>
@@ -193,11 +194,12 @@
                                             ';
                                             ?>
                                             <?php elseif($data['item'] == "gambar") :
+                                                $padding = "p-0";
                                                 $item = '<img src="'.$link['value'].'/assets/myimg/'.$data['data'].'?t='.time().'" onerror="this.onerror=null; this.src='.base_url().'assets/tabler-icons-1.39.1/icons/x.svg" class="card-img-top" width=100%>';
                                             ?>
                                             <?php endif;?>
                                             <div class="shadow card mb-3 soal">
-                                                <div class="card-body" id="soal-<?= $i?>">
+                                                <div class="card-body <?= $padding?>" id="soal-<?= $i?>">
                                                     
                                                     <?= $item?>
                                 
