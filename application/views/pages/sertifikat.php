@@ -20,7 +20,6 @@
                                             <h5 class="m-0 font-weight-bold text-dark">No. Sertifikat : </i><?= $no_doc?></h5>
                                         <!-- </div> -->
                                         <!-- <div class="card-body text-gray-900"> -->
-                                            <center><img src="<?= $link_foto[0]['value']?>/assets/foto/<?= $file?>?t=<?= time()?>" class="mb-3" width=150 alt=""></center>
                                             <p>Nama : <?= ucwords(strtolower($nama))?></p>
                                             <p>TTL : <?= $t4_lahir?>, <?= tgl_indo($tgl_lahir)?></p>
                                             <p>Alamat : <?= ucwords(strtolower($alamat))?></p>

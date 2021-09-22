@@ -111,7 +111,7 @@ class Soal extends CI_Controller {
                         
                         $number++;
 
-                    } else if($soal['item'] == "petunjuk" || $soal['item'] == "audio"){
+                    } else if($soal['item'] == "petunjuk" || $soal['item'] == "audio" || $soal['item'] == "gambar"){
                         $data['sesi'][$i]['soal'][$j] = $soal;
                     }
 
@@ -235,6 +235,15 @@ class Soal extends CI_Controller {
         
         $skor = skor($nilai_listening, $nilai_structure, $nilai_reading);
 
+        $replace_wa = array(
+            ' ' => '%20',
+            '"' => '%22'
+        );
+
+        $nama = str_replace(array_keys($replace_wa), $replace_wa, $this->input->post("nama"));
+        $nama_tes = str_replace(array_keys($replace_wa), $replace_wa, $tes['nama_tes']);
+        $tgl_tes = date("d-M-Y", strtotime($tes['tgl_tes']));
+
         $replacements = array(
             '$nama' => $this->input->post("nama"),
             '$t4_lahir' => $this->input->post("t4_lahir"),
@@ -250,6 +259,7 @@ class Soal extends CI_Controller {
             '$skor' => $skor,
             '$tgl_tes' => tgl_indo($tes["tgl_tes"], "lengkap"),
             '$tgl_pengumuman' => tgl_indo($tes["tgl_pengumuman"], "lengkap"),
+            '$link' => "<a target='_blank' href='https://wa.me/+".$config[3]['value']."?text=Hi%20Kak%2C%20Saya%20{$nama}%20telah%20mengikuti%20{$nama_tes}%20{$tgl_tes}.%0A%0ASaya%20ingin%20memesan%20e-certificate%20dari%20hasil%20test%20saya.'>Order Sertifikat</a>",
         );
 
         $msg = str_replace(array_keys($replacements), $replacements, $tes['msg']);
@@ -281,10 +291,9 @@ class Soal extends CI_Controller {
         if($data) $no = $data['num']+1;
         else $no = 1;
 
-        if($no > 0 && $no < 10) $no_doc = "000".$no;
-        elseif($no >= 10 && $no < 100) $no_doc = "00".$no;
-        elseif($no >= 100 && $no < 1000) $no_doc = "0".$no;
-        elseif($no >= 1000) $no_doc = $no;
+        if($no > 0 && $no < 10) $no_doc = "00".$no;
+        elseif($no >= 10 && $no < 100) $no_doc = "0".$no;
+        elseif($no >= 100) $no_doc = $no;
         
         $this->load->library('qrcode/ciqrcode'); //pemanggilan library QR CODE
 

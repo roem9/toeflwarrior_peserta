@@ -14,7 +14,7 @@
 
     function tgl_sertifikat($tgl){
         $data = explode("-", $tgl);
-        $hari = day($data[0]);
+        $hari = $data[0];
         $bulan = $data[1];
         $tahun = $data[2];
 
@@ -31,7 +31,7 @@
         if($bulan == "11") $bulan = "November";
         if($bulan == "12") $bulan = "December";
 
-        return $hari . " of " . $bulan . " " . $tahun;
+        return $bulan . " " . $hari . ", " . $tahun;
     }
 ?>
 
@@ -46,40 +46,61 @@
         .qrcode{
             width: 210px;
 			position: absolute;
-            left: 550px;
-			bottom: 160px;
+            left: 150px;
+			bottom: 80px;
             font-size: 35px;
             word-spacing: 3px;
         }
 
         .nilai{
+            /* background-color: red; */
             width: 95px;
 			position: absolute;
-            right: 212px;
-			bottom: 174px;
-            font-size: 18px;
-            font-family: 'rock';
-            word-spacing: 3px;
+            left: 683px;
+			top: 565px;
+            font-size: 20px;
+            font-family: 'montserrat';
+            word-spacing: 5px;
+            color: #6a7b83;
+            font-weight: bold;
+        }
+
+        .total{
+            /* background-color: red; */
+            width: 95px;
+			position: absolute;
+            left: 345px;
+			top: 565px;
+            font-size: 20px;
+            font-family: 'montserrat';
+            /* word-spacing: 3px; */
+            color: #6a7b83;
+            font-weight: bold;
         }
 
         .nama{
-            width: 700px;
+            /* background-color: red; */
+            width: 1000px;
 			position: absolute;
-            left: 330px;
-			top: 300px;
-            font-size: 32px;
-            font-family: 'rockb';
+            left: 63px;
+			top: 339px;
+            font-size: 39px;
+            /* font-family: 'rockb'; */
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #013e58;
         }
 
         .ttl{
-            width: 129px;
+            /* background-color: red; */
+            width: 250px;
 			position: absolute;
-            right: 413px;
-			top: 355px;
-            font-size: 18px;
-            font-family: 'rock';
+            left: 540px;
+			bottom: 147px;
+            font-size: 17px;
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
 
         .t4{
@@ -95,52 +116,63 @@
         }
         
         .listening{
+            /* background-color: red; */
             width: 95px;
 			position: absolute;
-            right: 212px;
-			bottom: 247px;
+            left: 683px;
+			top: 493px;
             font-size: 18px;
-            font-family: 'rock';
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
         
         .structure{
+            /* background-color: red; */
             width: 95px;
 			position: absolute;
-            right: 212px;
-			bottom: 222px;
+            left: 683px;
+			top: 517px;
             font-size: 18px;
-            font-family: 'rock';
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
         
         .reading{
+            /* background-color: red; */
             width: 95px;
 			position: absolute;
-            right: 212px;
-			bottom: 197px;
+            left: 683px;
+			top: 541px;
             font-size: 18px;
-            font-family: 'rock';
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
 
         .tgl{
+            /* background-color: red; */
+            width: 250px;
 			position: absolute;
-            left: 797px;
-			bottom: 126px;
-            font-size: 18px;
-            font-family: 'rock';
+            left: 205px;
+			bottom: 37px;
+            font-size: 16px;
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
 
         .no_doc{
-            width: 129px;
+            /* background-color: red; */
+            width: 250px;
 			position: absolute;
-            left: 464px;
-			top: 355px;
-            font-size: 18px;
-            font-family: 'rock';
+            left: 283px;
+			bottom: 19px;
+            font-size: 16px;
+            font-family: 'montserrat';
             word-spacing: 3px;
+            color: #6a7b83;
         }
 
         .gender{
@@ -182,12 +214,10 @@
             word-spacing: 3px;
         }
 
-        <?php if($tipe == "gambar") :?>
-            @page :first {
-                background-image: url("<?= base_url()?>assets/img/sertifikat.jpg");
-                background-image-resize: 6;
-            }
-        <?php endif;?>
+        @page :first {
+            background-image: url("<?= base_url()?>assets/img/sertifikat.jpg");
+            background-image-resize: 6;
+        }
         
     </style>
 </head>
@@ -195,18 +225,19 @@
         <div class="qrcode">
             <img src="<?= $config[0]['value']?>/assets/qrcode/<?= $id?>.png" width=100 alt="">
         </div>
-        <!-- <div class="nilai"><p style="text-align: center; margin: 0px"><b><?= round($skor)?></b></p></div>
-        <div class="nama"><p style="text-align: center; margin: 0px"><?= $nama?></p></div>
-        <div class="ttl"><p style="text-align: center; margin: 0px"><?= date("M d Y", strtotime($tgl_lahir))?></p></div>
-        <div class="t4"><p style="text-align: center; margin: 0px;"><?= $t4_lahir?></p></div>
-        <div class="gender"><p style="text-align: center; margin: 0px"><?= $jk?></p></div>
-        <div class="country"><p style="text-align: center; margin: 0px"><?= $country?></p></div>
-        <div class="language"><p style="text-align: center; margin: 0px"><?= $language?></p></div>
-        <div class="listening"><p style="text-align: center; margin: 0px"><?= $listening?></p></div>
-        <div class="structure"><p style="text-align: center; margin: 0px"><?= $structure?></p></div>
-        <div class="reading"><p style="text-align: center; margin: 0px"><?= $reading?></p></div>
-        <div class="no_doc"><p style="text-align: center; margin: 0px"><?= $no_doc?></p></div>
-        <div class="tgl"><p style="text-align: center; margin: 0px"><?= tgl_sertifikat(date("d-m-Y", strtotime($tgl_tes)))?></p></div>
-        <div class="tgl_akhir"><p style="text-align: center; margin: 0px"><?= tgl_sertifikat(date("d-m-Y", strtotime('+2 years', strtotime($tgl_tes))))?></p></div> -->
+        <div class="total">Total</div>
+        <div class="nilai"><p style="text-align: right; margin: 0px"><?= round($skor)?></p></div>
+        <div class="nama"><p style="text-align: center; margin: 0px"><b><?= $nama?></b></p></div>
+        <div class="ttl"><p style="text-align: left; margin: 0px"><?= tgl_sertifikat(date("d-m-Y", strtotime($tgl_lahir)))?></p></div>
+        <!-- <div class="t4"><p style="text-align: center; margin: 0px;"><?= $t4_lahir?></p></div> -->
+        <!-- <div class="gender"><p style="text-align: center; margin: 0px"><?= $jk?></p></div> -->
+        <!-- <div class="country"><p style="text-align: center; margin: 0px"><?= $country?></p></div> -->
+        <!-- <div class="language"><p style="text-align: center; margin: 0px"><?= $language?></p></div> -->
+        <div class="listening"><p style="text-align: right; margin: 0px"><?= $listening?></p></div>
+        <div class="structure"><p style="text-align: right; margin: 0px"><?= $structure?></p></div>
+        <div class="reading"><p style="text-align: right; margin: 0px"><?= $reading?></p></div>
+        <div class="no_doc"><p style="text-align: left; margin: 0px"><?= $no_doc?></p></div>
+        <div class="tgl"><p style="text-align: left; margin: 0px"><?= tgl_sertifikat(date("d-m-Y", strtotime($tgl_tes)))?></p></div>
+        <!-- <div class="tgl_akhir"><p style="text-align: center; margin: 0px"><?= tgl_sertifikat(date("d-m-Y", strtotime('+2 years', strtotime($tgl_tes))))?></p></div> -->
     </body>
 </html>
