@@ -156,7 +156,7 @@
                                                                     <div class="text-right" dir="rtl">
                                                                         <label>
                                                                             <input type="radio" data-id="'.$index.'|'.$i.'"  name="radio-'.$index.'['.$i.']" value="'.$choice.'"> 
-                                                                            '.$choice.'
+                                                                            <span>'.$choice.'</span>
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -172,7 +172,7 @@
                                                             <div class="mb-3">
                                                                 <label>
                                                                     <input type="radio" data-id="'.$index.'|'.$i.'"  name="radio-'.$index.'['.$i.']" value="'.$choice.'"> 
-                                                                    '.$choice.'
+                                                                    <span>'.$choice.'</span>
                                                                 </label>
                                                             </div>' ?>
                                                     <?php endforeach;?>
