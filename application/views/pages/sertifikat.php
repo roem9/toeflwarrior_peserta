@@ -21,7 +21,7 @@
                                         <!-- </div> -->
                                         <!-- <div class="card-body text-gray-900"> -->
                                             <p class="mt-3">
-                                                Nama : <?= ucwords(strtolower($nama))?><br>
+                                                Nama : <?= $nama?><br>
                                                 TTL : <?= $t4_lahir?>, <?= tgl_indo($tgl_lahir)?><br>
                                                 Alamat : <?= ucwords(strtolower($alamat))?>
                                             </p>
